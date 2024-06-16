@@ -1,0 +1,35 @@
+#TRƯỚC KHI MUỐN LÀM CÁI GÌ CŨNG PHẢI IMPORT LIBRARY
+import pandas as pd  # read data into dataframe
+# pd.set_option(pat, value) # customize aspects
+#for example
+pd.set_option(display.max_rows) # cái này tạo bảng hay cần 
+
+#display dataframe 
+display()
+
+#CÁI NÀY LÀ TẢI FILE TỪ LINK URL 
+from pyodide.http import pyfetch
+ 
+async def download(url, filename):
+    response = await pyfetch(url)
+    if response.status == 200:
+        with open(filename, "wb") as f:
+            f.write(await response.bytes())
+ 
+path = "CHÈN LINK VÀO"
+ 
+#you will need to download the dataset; if you are running locally, please comment out the following 
+await download(path, "recipes(1).csv")
+
+#IMPORT DECISION TREES = scikit-learn 
+from sklearn import tree
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+import matplotlib.pyplot as plt
+
+# If running locally, you can try using the graphviz library but we'll use sklearn's plot_tree method
+# !conda install python-graphviz --yes
+# from sklearn.tree import export_graphviz
+
+import itertools
+
